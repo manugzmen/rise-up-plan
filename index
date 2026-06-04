@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>RISE UP — Outdoor Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0b0a;
+    --panel:#141614;
+    --panel-2:#1b1e1a;
+    --line:#2a2e28;
+    --ink:#f3f5ef;
+    --mute:#8d948a;
+    --orange:#ff5a1f;
+    --lime:#b6ff3c;
+    --orange-dim:rgba(255,90,31,.14);
+    --lime-dim:rgba(182,255,60,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Manrope',sans-serif;
+    line-height:1.5;
+    padding-bottom:64px;
+    overflow-x:hidden;
+    background-image:
+      radial-gradient(140% 60% at 100% 0%, rgba(255,90,31,.10), transparent 55%),
+      radial-gradient(120% 50% at 0% 100%, rgba(182,255,60,.06), transparent 50%);
+    background-attachment:fixed;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    padding:38px 22px 24px;
+    position:relative;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .kicker{
+    font-family:'Space Mono',monospace;
+    font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--orange);margin-bottom:14px;
+  }
+  h1{
+    font-family:'Anton',sans-serif;
+    font-size:clamp(54px,18vw,84px);
+    line-height:.84;letter-spacing:.01em;text-transform:uppercase;
+  }
+  h1 .o{color:var(--orange);}
+  h1 .l{
+    color:var(--bg);
+    -webkit-text-stroke:1.6px var(--lime);
+    text-stroke:1.6px var(--lime);
+  }
+  .sub{
+    margin-top:16px;color:var(--mute);font-size:14px;max-width:34ch;font-weight:500;
+  }
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
+  .badge{
+    font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.06em;
+    padding:6px 10px;border:1px solid var(--line);border-radius:100px;color:var(--mute);
+    text-transform:uppercase;
+  }
+  .badge b{color:var(--lime);}
+
+  /* ---------- TABS ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(10,11,10,.86);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .tabs{
+    display:flex;gap:6px;overflow-x:auto;padding:11px 14px;
+    scrollbar-width:none;
+  }
+  .tabs::-webkit-scrollbar{display:none;}
+  .tab{
+    flex:0 0 auto;
+    font-family:'Anton',sans-serif;letter-spacing:.04em;
+    font-size:15px;text-transform:uppercase;
+    color:var(--mute);background:transparent;border:1px solid var(--line);
+    padding:9px 15px;border-radius:10px;cursor:pointer;transition:.18s;
+    white-space:nowrap;
+  }
+  .tab:active{transform:scale(.95);}
+  .tab.on{color:var(--bg);background:var(--orange);border-color:var(--orange);}
+  .tab.fuel.on{background:var(--lime);border-color:var(--lime);}
+
+  /* ---------- PANELS ---------- */
+  main{padding:22px 18px 10px;max-width:560px;margin:0 auto;}
+  .panel{display:none;animation:rise .35s cubic-bezier(.2,.7,.2,1);}
+  .panel.on{display:block;}
+  @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+  .ptitle{display:flex;align-items:baseline;gap:12px;margin-bottom:6px;}
+  .pnum{font-family:'Anton',sans-serif;font-size:48px;color:var(--orange);line-height:1;}
+  .ph{font-family:'Anton',sans-serif;font-size:26px;text-transform:uppercase;letter-spacing:.02em;}
+  .ptag{
+    display:inline-block;font-family:'Space Mono',monospace;font-size:11px;
+    color:var(--lime);background:var(--lime-dim);padding:5px 10px;border-radius:7px;
+    margin-bottom:20px;letter-spacing:.04em;
+  }
+
+  .card{
+    background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    padding:18px;margin-bottom:14px;
+  }
+  .card h3{
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--mute);margin-bottom:14px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .card h3::before{content:"";width:7px;height:7px;border-radius:2px;background:var(--orange);}
+  .card.green h3::before{background:var(--lime);}
+
+  .cardio{
+    display:flex;align-items:center;gap:12px;
+    background:var(--orange-dim);border:1px solid rgba(255,90,31,.3);
+    border-radius:12px;padding:13px 15px;margin-bottom:16px;
+  }
+  .cardio .ico{font-size:20px;}
+  .cardio .txt{font-size:14px;font-weight:700;}
+  .cardio .txt span{display:block;font-weight:500;color:var(--mute);font-size:12px;margin-top:2px;}
+
+  ul.ex{list-style:none;}
+  ul.ex li{
+    display:flex;justify-content:space-between;align-items:center;gap:14px;
+    padding:12px 0;border-bottom:1px solid var(--line);cursor:pointer;
+    transition:.15s;
+  }
+  ul.ex li:last-child{border-bottom:none;}
+  ul.ex li .nm{font-size:14.5px;font-weight:600;display:flex;align-items:center;gap:10px;}
+  ul.ex li .chk{
+    width:18px;height:18px;border:1.8px solid var(--line);border-radius:6px;flex:0 0 auto;
+    display:grid;place-items:center;transition:.15s;
+  }
+  ul.ex li .rep{
+    font-family:'Space Mono',monospace;font-size:13px;color:var(--lime);
+    white-space:nowrap;font-weight:700;
+  }
+  ul.ex li.done .nm{color:var(--mute);text-decoration:line-through;}
+  ul.ex li.done .chk{background:var(--lime);border-color:var(--lime);}
+  ul.ex li.done .chk::after{content:"\2713";color:var(--bg);font-size:12px;font-weight:900;}
+
+  .note{
+    font-size:13px;color:var(--mute);line-height:1.6;
+    border-left:2px solid var(--orange);padding:4px 0 4px 14px;margin-top:6px;
+  }
+  .note b{color:var(--ink);}
+
+  /* rules list */
+  ul.rules{list-style:none;}
+  ul.rules li{
+    padding:14px 0;border-bottom:1px solid var(--line);font-size:14.5px;
+    display:flex;gap:12px;align-items:flex-start;
+  }
+  ul.rules li:last-child{border-bottom:none;}
+  ul.rules li .n{
+    font-family:'Anton',sans-serif;color:var(--orange);font-size:18px;line-height:1.1;flex:0 0 auto;width:24px;
+  }
+  ul.rules li b{color:var(--lime);font-weight:700;}
+
+  /* progression weeks */
+  .week{display:flex;gap:14px;margin-bottom:12px;}
+  .week .wk{
+    font-family:'Anton',sans-serif;font-size:13px;background:var(--panel-2);
+    border:1px solid var(--line);border-radius:9px;padding:9px 0;width:58px;text-align:center;
+    flex:0 0 auto;color:var(--lime);letter-spacing:.05em;
+  }
+  .week .wtxt{font-size:13.5px;padding-top:7px;color:var(--ink);}
+  .week .wtxt b{color:var(--orange);}
+
+  /* protein calc */
+  .calc{
+    background:linear-gradient(160deg,var(--panel-2),var(--panel));
+    border:1px solid rgba(182,255,60,.25);border-radius:18px;padding:20px;margin-bottom:16px;
+  }
+  .calc label{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);}
+  .inrow{display:flex;gap:10px;align-items:center;margin:12px 0 18px;}
+  .inrow input{
+    flex:1;background:var(--bg);border:1px solid var(--line);color:var(--ink);
+    font-family:'Anton',sans-serif;font-size:30px;padding:10px 16px;border-radius:12px;width:100%;
+    outline:none;transition:.15s;
+  }
+  .inrow input:focus{border-color:var(--lime);}
+  .inrow .unit{font-family:'Anton',sans-serif;font-size:18px;color:var(--mute);}
+  .result{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .rbox{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center;}
+  .rbox .big{font-family:'Anton',sans-serif;font-size:34px;color:var(--lime);line-height:1;}
+  .rbox.orange .big{color:var(--orange);}
+  .rbox .cap{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--mute);text-transform:uppercase;margin-top:8px;}
+  .permeal{
+    margin-top:12px;font-size:13px;color:var(--ink);background:var(--lime-dim);
+    border-radius:10px;padding:12px;text-align:center;
+  }
+  .permeal b{color:var(--lime);}
+
+  .foodlist{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+  .food{font-size:12.5px;background:var(--panel-2);border:1px solid var(--line);border-radius:100px;padding:7px 13px;color:var(--ink);font-weight:600;}
+
+  /* personal target */
+  .target{
+    background:linear-gradient(150deg,rgba(182,255,60,.16),rgba(255,90,31,.08));
+    border:1px solid rgba(182,255,60,.4);border-radius:18px;
+    padding:20px;margin-bottom:14px;text-align:center;
+  }
+  .target .tlabel{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);}
+  .target .tbig{font-family:'Anton',sans-serif;font-size:52px;color:var(--lime);line-height:1;margin:8px 0 6px;}
+  .target .tbig span{font-size:20px;color:var(--mute);}
+  .target .tsmall{font-size:12.5px;color:var(--ink);}
+
+  /* eat / avoid lists */
+  ul.eat{list-style:none;}
+  ul.eat li{
+    font-size:13.5px;line-height:1.55;padding:11px 0 11px 22px;position:relative;
+    border-bottom:1px solid var(--line);color:var(--ink);
+  }
+  ul.eat li:last-child{border-bottom:none;}
+  ul.eat li b{color:var(--lime);}
+  ul.eat li::before{content:"";position:absolute;left:2px;top:17px;width:8px;height:8px;border-radius:50%;background:var(--lime);}
+  .card.avoid{border-color:rgba(255,90,31,.3);}
+  .card.avoid h3::before{background:var(--orange);}
+  .card.avoid ul.eat li::before{background:var(--orange);border-radius:2px;}
+
+  /* plate trick */
+  .plate{
+    background:var(--panel);border:1px dashed var(--line);border-radius:16px;padding:18px;margin-bottom:14px;
+  }
+  .plate .ph2{font-family:'Anton',sans-serif;font-size:20px;text-transform:uppercase;color:var(--orange);margin-bottom:8px;letter-spacing:.02em;}
+  .plate p{font-size:13.5px;line-height:1.65;color:var(--ink);}
+  .plate p b{color:var(--lime);}
+
+  footer{
+    text-align:center;padding:28px 20px 10px;color:var(--mute);
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;
+  }
+  footer .bolt{color:var(--orange);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kicker">Outdoor · Calisthenics · Huberman / Galpin</div>
+  <h1><span class="o">RISE</span><br><span class="l">UP.</span></h1>
+  <p class="sub">4-day plan blending strength, Zone 2 and VO2 max. Tap a tab to navigate.</p>
+  <div class="badges">
+    <span class="badge">4 <b>DAYS</b></span>
+    <span class="badge">ZONE 2 + <b>VO2</b></span>
+    <span class="badge">PROGRESSIVE <b>OVERLOAD</b></span>
+  </div>
+</header>
+
+<nav>
+  <div class="tabs" id="tabs">
+    <button class="tab on" data-t="rules">Rules</button>
+    <button class="tab" data-t="d1">D1 · Pull</button>
+    <button class="tab" data-t="d2">D2 · Push</button>
+    <button class="tab" data-t="d3">D3 · Legs</button>
+    <button class="tab" data-t="d4">D4 · Full</button>
+    <button class="tab" data-t="prog">Progression</button>
+    <button class="tab fuel" data-t="fuel">Protein</button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- RULES -->
+  <section class="panel on" id="rules">
+    <div class="ptitle"><span class="ph">The Rules</span></div>
+    <span class="ptag">read once, apply always</span>
+    <div class="card">
+      <ul class="rules">
+        <li><span class="n">01</span><div><b>Progressive overload.</b> Each week +1–2 reps; at the top of the range, move to a harder variation.</div></li>
+        <li><span class="n">02</span><div><b>Leave 1–2 reps in reserve.</b> Not to failure every set.</div></li>
+        <li><span class="n">03</span><div><b>Zone 2 = can talk, can't sing</b> (≈6–7 min/km). Weekly: ~15–18 km Z2 + 1 sprint day.</div></li>
+        <li><span class="n">04</span><div><b>Warm up 5 min</b> before lifting (elliptical or rotation discs).</div></li>
+        <li><span class="n">05</span><div><b>Rest = growth.</b> Off days: walk, hike or mobility.</div></li>
+      </ul>
+    </div>
+    <p class="note"><b>3-day version:</b> merge D2 + D3 into one push/legs session and keep D1 and D4. You still hit Zone 2, sprints and full-body strength.</p>
+  </section>
+
+  <!-- DAY 1 -->
+  <section class="panel" id="d1">
+    <div class="ptitle"><span class="pnum">01</span><span class="ph">Pull + Zone 2</span></div>
+    <span class="ptag">back · biceps · core</span>
+    <div class="cardio">
+      <span class="ico">🏃</span>
+      <div class="txt">Run Zone 2 · ~6 km<span>easy conversational pace (≈35–40 min)</span></div>
+    </div>
+    <div class="card">
+      <h3>Strength · rest 90–120s</h3>
+      <ul class="ex">
+        <li><span class="nm"><span class="chk"></span>Pull-ups</span><span class="rep">4 × max</span></li>
+        <li><span class="nm"><span class="chk"></span>Chin-ups (underhand)</span><span class="rep">3 × max</span></li>
+        <li><span class="nm"><span class="chk"></span>Inverted rows (low bar)</span><span class="rep">4 × 12</span></li>
+        <li><span class="nm"><span class="chk"></span>Hanging leg raises</span><span class="rep">4 × 12</span></li>
+        <li><span class="nm"><span class="chk"></span>Dead hang</span><span class="rep">3 × 30–45s</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- DAY 2 -->
+  <section class="panel" id="d2">
+    <div class="ptitle"><span class="pnum">02</span><span class="ph">Push + Zone 2</span></div>
+    <span class="ptag">chest · shoulders · triceps</span>
+    <div class="cardio">
+      <span class="ico">🏃</span>
+      <div class="txt">Run Zone 2 · ~5 km<span>easy conversational pace (≈30–35 min)</span></div>
+    </div>
+    <div class="card">
+      <h3>Strength</h3>
+      <ul class="ex">
+        <li><span class="nm"><span class="chk"></span>Dips on parallel bars</span><span class="rep">4 × 8–12</span></li>
+        <li><span class="nm"><span class="chk"></span>Decline push-ups (feet on bench)</span><span class="rep">4 × 12–15</span></li>
+        <li><span class="nm"><span class="chk"></span>Pike push-ups (shoulders)</span><span class="rep">3 × 10</span></li>
+        <li><span class="nm"><span class="chk"></span>Diamond push-ups (triceps)</span><span class="rep">3 × max</span></li>
+        <li><span class="nm"><span class="chk"></span>Plank</span><span class="rep">3 × 45–60s</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- DAY 3 -->
+  <section class="panel" id="d3">
+    <div class="ptitle"><span class="pnum">03</span><span class="ph">Legs + Core</span></div>
+    <span class="ptag">legs · calves · abs</span>
+    <div class="cardio">
+      <span class="ico">🚶</span>
+      <div class="txt">Light cardio · ~2.5–3 km<span>easy jog or elliptical warm-up</span></div>
+    </div>
+    <div class="card green">
+      <h3>Strength</h3>
+      <ul class="ex">
+        <li><span class="nm"><span class="chk"></span>Bodyweight squats</span><span class="rep">4 × 20–25</span></li>
+        <li><span class="nm"><span class="chk"></span>Bulgarian split squats (foot on bench)</span><span class="rep">3 × 10–12/leg</span></li>
+        <li><span class="nm"><span class="chk"></span>Step-ups on bench</span><span class="rep">3 × 12/leg</span></li>
+        <li><span class="nm"><span class="chk"></span>Single-leg calf raises</span><span class="rep">4 × 15/leg</span></li>
+        <li><span class="nm"><span class="chk"></span>Hanging knee raises</span><span class="rep">4 × 15</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- DAY 4 -->
+  <section class="panel" id="d4">
+    <div class="ptitle"><span class="pnum">04</span><span class="ph">Full Body + Sprints</span></div>
+    <span class="ptag">VO2 max · conditioning</span>
+    <p class="note" style="margin-bottom:16px;"><b>Today do strength FIRST</b>, then sprints.</p>
+    <div class="card">
+      <h3>Circuit · 5 rounds, minimal rest</h3>
+      <ul class="ex">
+        <li><span class="nm"><span class="chk"></span>Pull-ups</span><span class="rep">× 6</span></li>
+        <li><span class="nm"><span class="chk"></span>Dips</span><span class="rep">× 8</span></li>
+        <li><span class="nm"><span class="chk"></span>Push-ups</span><span class="rep">× 12</span></li>
+        <li><span class="nm"><span class="chk"></span>Jump squats</span><span class="rep">× 15</span></li>
+      </ul>
+    </div>
+    <div class="cardio">
+      <span class="ico">⚡</span>
+      <div class="txt">VO2 finisher · Sprints<span>8–10 × 100m (walk back) ≈ 1 km · or 6 × (1 min hard / 2 min easy)</span></div>
+    </div>
+  </section>
+
+  <!-- PROGRESSION -->
+  <section class="panel" id="prog">
+    <div class="ptitle"><span class="ph">4-Week Progression</span></div>
+    <span class="ptag">how to level up without plateauing</span>
+    <div class="card">
+      <div class="week"><span class="wk">WK 1</span><span class="wtxt">Find your <b>baseline</b> reps, 1–2 in reserve.</span></div>
+      <div class="week"><span class="wk">WK 2</span><span class="wtxt"><b>+1–2 reps</b> each set · <b>+0.5–1 km</b> on each Z2 run.</span></div>
+      <div class="week"><span class="wk">WK 3</span><span class="wtxt">+1–2 reps again, or <b>harder variation</b> (feet elevated, 3s slow tempo, archer push-ups).</span></div>
+      <div class="week"><span class="wk">WK 4</span><span class="wtxt">Hardest variations + <b>1–2 extra sprints</b>. Too fatigued: deload, then restart stronger.</span></div>
+    </div>
+    <div class="card green">
+      <h3>Path to more pull-ups</h3>
+      <p style="font-size:14px;line-height:1.7;color:var(--ink);">
+        Negatives (jump up, lower 5s) <span style="color:var(--lime);">→</span>
+        band-assisted <span style="color:var(--lime);">→</span>
+        full reps <span style="color:var(--lime);">→</span>
+        add reps weekly <span style="color:var(--lime);">→</span>
+        weighted / archer.
+      </p>
+    </div>
+  </section>
+
+  <!-- FUEL -->
+  <section class="panel" id="fuel">
+    <div class="ptitle"><span class="ph" style="color:var(--lime);">Protein</span></div>
+    <span class="ptag">your profile: 70 kg · 1.79 m · BMI ~22</span>
+    <div class="target">
+      <div class="tlabel">Your daily target to build muscle</div>
+      <div class="tbig">140–150 <span>g/day</span></div>
+      <div class="tsmall">full range 112–154 g · aim high</div>
+    </div>
+    <div class="calc">
+      <label for="w">Recalculate if your weight changes</label>
+      <div class="inrow">
+        <input id="w" type="number" inputmode="decimal" value="70" min="30" max="200">
+        <span class="unit">KG</span>
+      </div>
+      <div class="result">
+        <div class="rbox orange"><div class="big" id="pmin">112</div><div class="cap">g/day minimum</div></div>
+        <div class="rbox"><div class="big" id="pmax">154</div><div class="cap">g/day maximum</div></div>
+      </div>
+      <div class="permeal">≈ <b id="pmeal">28–39 g</b> per meal (across 4 meals)</div>
+    </div>
+    <div class="card green">
+      <h3>Where to get it</h3>
+      <div class="foodlist">
+        <span class="food">🥚 Eggs</span>
+        <span class="food">🍗 Chicken</span>
+        <span class="food">🥩 Beef</span>
+        <span class="food">🐟 Fish</span>
+        <span class="food">🥛 Dairy</span>
+        <span class="food">🥤 Whey</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Make it work</h3>
+      <ul class="rules">
+        <li><span class="n">+</span><div><b style="color:var(--lime);">To grow:</b> slight calorie surplus + 7–9 h sleep.</div></li>
+        <li><span class="n">−</span><div><b style="color:var(--orange);">To get ripped:</b> moderate deficit. Zone 2 + sprints burn the fat.</div></li>
+        <li><span class="n">★</span><div>Abs are made in the kitchen.</div></li>
+      </ul>
+    </div>
+
+    <div class="card green">
+      <h3>✓ Prioritize · eat plenty</h3>
+      <ul class="eat">
+        <li><b>Protein every meal</b> — eggs, chicken, lean meat, fish, Greek yogurt, cottage cheese, whey.</li>
+        <li><b>Good carbs</b> — rice, oats, potato, fruit, whole grains. Your fuel, don't fear them.</li>
+        <li><b>Healthy fats</b> — olive oil, avocado, nuts, whole eggs.</li>
+        <li><b>Veggies every meal</b> — fiber, micronutrients, fullness.</li>
+        <li><b>Water</b> — 2.5–3 L/day, more on run days.</li>
+      </ul>
+    </div>
+
+    <div class="card avoid">
+      <h3>✕ Limit · little, not banned</h3>
+      <ul class="eat">
+        <li>Soda and sugary drinks (empty calories).</li>
+        <li>Fried / fast food and pastries / refined sugar.</li>
+        <li>Ultra-processed packaged snacks.</li>
+        <li>Alcohol — slows recovery and muscle growth.</li>
+      </ul>
+    </div>
+
+    <div class="plate">
+      <div class="ph2">The Plate Trick</div>
+      <p>Half the plate = <b>protein + veg</b> · a quarter = <b>carbs</b> · a touch of <b>healthy fat</b>. Short on protein? A whey shake adds 25–30 g in seconds.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>RISE UP <span class="bolt">⚡</span> keep it simple, keep it consistent</footer>
+
+<script>
+  // Tabs
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.panel');
+  tabs.forEach(t=>{
+    t.addEventListener('click',()=>{
+      tabs.forEach(x=>x.classList.remove('on'));
+      panels.forEach(p=>p.classList.remove('on'));
+      t.classList.add('on');
+      document.getElementById(t.dataset.t).classList.add('on');
+      window.scrollTo({top:document.querySelector('nav').offsetHeight,behavior:'smooth'});
+    });
+  });
+
+  // Tap-to-check exercises (in-memory only)
+  document.querySelectorAll('ul.ex li').forEach(li=>{
+    li.addEventListener('click',()=>li.classList.toggle('done'));
+  });
+
+  // Protein calculator
+  const w = document.getElementById('w');
+  const pmin = document.getElementById('pmin');
+  const pmax = document.getElementById('pmax');
+  const pmeal = document.getElementById('pmeal');
+  function calc(){
+    const kg = parseFloat(w.value);
+    if(!kg || kg<=0){ pmin.textContent='–'; pmax.textContent='–'; pmeal.textContent='–'; return; }
+    const lo = Math.round(kg*1.6);
+    const hi = Math.round(kg*2.2);
+    pmin.textContent = lo;
+    pmax.textContent = hi;
+    pmeal.textContent = Math.round(lo/4) + '–' + Math.round(hi/4) + ' g';
+  }
+  w.addEventListener('input',calc);
+</script>
+</body>
+</html>
